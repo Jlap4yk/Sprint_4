@@ -10,7 +10,11 @@ import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.praktikum.MainPage;
+
+import java.time.Duration;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.fail;
@@ -18,7 +22,7 @@ import static org.junit.Assert.fail;
 @RunWith(Parameterized.class)
 public class MainPageTest {
     private WebDriver driver;
-    private final String pageUrl = "https://qa-scooter.praktikum-services.ru/";
+    private final String pageUrl = MainPage.PAGE_URL;
 
     private final int numberOfElement;
 
@@ -50,8 +54,16 @@ public class MainPageTest {
         //WebDriverManager.chromedriver().setup();
         //driver = new ChromeDriver();
         //WebDriverManager.firefoxdriver().setup();
+
         driver = new FirefoxDriver();
         driver.get(pageUrl);
+
+        //МЕТОД для полного окна
+     //   driver = new FirefoxDriver();
+    //    driver.manage().window().maximize(); // Запуск в полноэкранном режиме
+    //    driver.get(pageUrl);
+    //    new WebDriverWait(driver, Duration.ofSeconds(10))
+    //            .until(ExpectedConditions.urlToBe(MainPage.PAGE_URL));
     }
 
     @Test

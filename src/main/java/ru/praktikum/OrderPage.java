@@ -10,13 +10,8 @@ import java.time.Duration;
 import java.util.List;
 
 public class OrderPage {
-
     // Создаём драйвер
     private WebDriver driver;
-
-    // Локаторы для кнопок «Заказать»
-    private final By orderButtonTop = By.xpath(".//button[@class='Button_Button__ra12g' and text()='Заказать']"); // Верхняя кнопка
-    private final By orderButtonBottom = By.xpath(".//div[@class='Home_FinishButton__1_cWm']//button[text()='Заказать']"); // Нижняя кнопка
 
     // Форма заказа "Для кого самокат"
     private final By orderForm = By.className("Order_Form__17u6u");
@@ -54,15 +49,13 @@ public class OrderPage {
 
     // Кнопка «Заказать» (финальная)
     private final By orderButtonFinal = By.xpath(".//button[contains(@class, 'Button_Middle__1CSJM') and (text()='Заказать')]");
-
     // Кнопка «Да» в окне подтверждения заказа
     private final By confirmYesButton = By.xpath(".//button[contains(@class, 'Button_Middle__1CSJM') and (text()='Да')]");
-
     // текст сообщения хотите оформить заказ
     private final By firstOrderMessage = By.className("Order_ModalHeader__3FDaJ");
-
     // Текст с сообщением об успешном оформлении заказа
     private final By successOrderMessage = By.xpath(".//div[starts-with(@class,'Order_ModalHeader')]");
+
 
     // Конструктор класса OrderPage
     public OrderPage(WebDriver driver) {
@@ -71,52 +64,11 @@ public class OrderPage {
 
     // Метод ожидания загрузки формы
     public void waitForLoadOrderPage() {
-        new WebDriverWait(driver, Duration.ofSeconds(2))
+        new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.visibilityOfElementLocated(orderForm));
     }
 
-    // Метод клика по верхней кнопке "Заказать"
-    public void clickOrderButtonTop(boolean isTopButton) {
-        new WebDriverWait(driver, Duration.ofSeconds(2))
-                .until(ExpectedConditions.elementToBeClickable(orderButtonTop));
-        driver.findElement(orderButtonTop).click();
-    }
 
-    // Метод клика по нижней кнопке "Заказать"
-    public void clickOrderButtonBottom(boolean isTopButton) {
-        new WebDriverWait(driver, Duration.ofSeconds(2))
-                .until(ExpectedConditions.elementToBeClickable(orderButtonBottom));
-        driver.findElement(orderButtonBottom).click();
-    }
-
-
-
-    // Метод выбора элемента для выпадающего списка
-    private void chooseElementFromDropdown(By dropDownElements, String elementToChoose) {
-        List<WebElement> elementsFiltered = driver.findElements(dropDownElements);
-        for (WebElement element : elementsFiltered) {
-            if (element.getText().equals(elementToChoose)) {
-                element.click();
-                break;
-            }
-        }
-    }
-
-    // Метод ожидания загрузки элемента
-    private void waitForElementLoad(By elementToLoad) {
-        new WebDriverWait(driver, Duration.ofSeconds(2))
-                .until(ExpectedConditions.visibilityOfElementLocated(elementToLoad));
-    }
-
-    // локатор кнопки куки
-    private final By cookieButton= By.xpath(".//button[contains(@class, 'App_CookieButton__3cvqF') and @id='rcc-confirm-button' and contains(text(), 'да все привыкли')]");
-
-    // Метод принятия куки
-    public void acceptCookies() {
-        new WebDriverWait(driver, Duration.ofSeconds(2))
-                .until(ExpectedConditions.elementToBeClickable(cookieButton));
-        driver.findElement(cookieButton).click();
-    }
 
     // Метод заполнения поля Имя
     public void setNameInput(String name) {
@@ -190,7 +142,7 @@ public class OrderPage {
 
     // Метод нажатия на подтверждение заказа
     private void clickConfirmOrderButton() {
-        new WebDriverWait(driver, Duration.ofSeconds(2))
+        new WebDriverWait(driver, Duration.ofSeconds(8))
                 .until(ExpectedConditions.elementToBeClickable(confirmYesButton));
         driver.findElement(confirmYesButton).click();
     }
@@ -201,8 +153,26 @@ public class OrderPage {
         waitForElementLoad(confirmYesButton);
         clickConfirmOrderButton();
     }
+
     // Метод получения сообщения об оформлении заказа
     public String getOrderSuccessMessage() {
         return driver.findElement(successOrderMessage).getText();
+    }
+
+    // Метод выбора элемента для выпадающего списка
+    private void chooseElementFromDropdown(By dropDownElements, String elementToChoose) {
+        List<WebElement> elementsFiltered = driver.findElements(dropDownElements);
+        for (WebElement element : elementsFiltered) {
+            if (element.getText().equals(elementToChoose)) {
+                element.click();
+                break;
+            }
+        }
+    }
+
+    // Метод ожидания загрузки элемента
+    private void waitForElementLoad(By elementToLoad) {
+        new WebDriverWait(driver, Duration.ofSeconds(8))
+                .until(ExpectedConditions.visibilityOfElementLocated(elementToLoad));
     }
 }
