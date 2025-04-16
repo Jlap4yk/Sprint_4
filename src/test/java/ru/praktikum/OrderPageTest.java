@@ -59,11 +59,13 @@ public class OrderPageTest {
     @Before
     public void StartUp() {
         WebDriverManager.chromedriver().setup();
+
         // закомичен потому что проверяем через Мозилу, снять комит, поставить на фоксе что бы проверить на хроме.
         // driver = new ChromeDriver();
         //driver = new FirefoxDriver();
         //driver.get(pageUrl);
         //WebDriverManager.firefoxdriver().setup();
+
         driver = new FirefoxDriver();
         driver.manage().window().maximize(); // Запуск в полноэкранном режиме
         driver.get(pageUrl);

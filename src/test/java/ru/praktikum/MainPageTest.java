@@ -18,11 +18,12 @@ import java.time.Duration;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.fail;
+import static ru.praktikum.MainPage.PAGE_URL;
 
 @RunWith(Parameterized.class)
 public class MainPageTest {
     private WebDriver driver;
-    private final String pageUrl = MainPage.PAGE_URL;
+    private final String pageUrl = PAGE_URL;
 
     private final int numberOfElement;
 
@@ -51,19 +52,19 @@ public class MainPageTest {
 
     @Before
     public void StartUp() {
-        //WebDriverManager.chromedriver().setup();
-        //driver = new ChromeDriver();
-        //WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.get(PAGE_URL);
+        driver.manage().window().maximize();
 
-        driver = new FirefoxDriver();
-        driver.get(pageUrl);
+        //driver = new FirefoxDriver();
+        //driver.get(PAGE_URL);
 
-        //МЕТОД для полного окна
      //   driver = new FirefoxDriver();
     //    driver.manage().window().maximize(); // Запуск в полноэкранном режиме
     //    driver.get(pageUrl);
     //    new WebDriverWait(driver, Duration.ofSeconds(10))
-    //            .until(ExpectedConditions.urlToBe(MainPage.PAGE_URL));
+    //            .until(ExpectedConditions.urlToBe(PAGE_URL));
     }
 
     @Test

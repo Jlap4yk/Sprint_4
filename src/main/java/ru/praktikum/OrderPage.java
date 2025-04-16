@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class OrderPage {
-    // Создаём драйвер
+    // Создаём драйвер.
     private WebDriver driver;
 
     // Форма заказа "Для кого самокат"
