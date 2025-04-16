@@ -53,18 +53,10 @@ public class MainPageTest {
     @Before
     public void StartUp() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+       // driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         driver.get(PAGE_URL);
         driver.manage().window().maximize();
-
-        //driver = new FirefoxDriver();
-        //driver.get(PAGE_URL);
-
-     //   driver = new FirefoxDriver();
-    //    driver.manage().window().maximize(); // Запуск в полноэкранном режиме
-    //    driver.get(pageUrl);
-    //    new WebDriverWait(driver, Duration.ofSeconds(10))
-    //            .until(ExpectedConditions.urlToBe(PAGE_URL));
     }
 
     @Test
@@ -72,7 +64,7 @@ public class MainPageTest {
         MainPage mainPage = new MainPage(driver);
 
         mainPage.clickOnCookieButton();
-
+mainPage.scrollToElement(numberOfElement);
         mainPage.clickHeaderAccordion(numberOfElement);
         mainPage.waitLoadAccordionItem(numberOfElement);
 

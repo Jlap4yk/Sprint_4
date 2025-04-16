@@ -1,7 +1,9 @@
 package ru.praktikum;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -108,6 +110,13 @@ public class MainPage {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(orderButtonBottom));
         driver.findElement(orderButtonBottom).click();
+    }
+    //Скролл
+    public void scrollToElement(int index) {
+        WebElement accordion = driver.findElement(By.className("accordion__heading"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", accordion);
+        new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOf(accordion));
     }
 }
 
